@@ -1,0 +1,3 @@
+# Return a list of all ami's in use in aws
+aws ec2 describe-instances --query 'Reservations[*].Instances[*].[ImageId,Tags[*]]' | grep ami | perl -pi -e "s/,//g;" | perl -pi -e "s/\"//g;" | perl -pi -e "s/\s+/\n/g;" | grep -v "^$"
+
